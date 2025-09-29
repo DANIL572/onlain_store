@@ -1,33 +1,28 @@
 from django.db import models
 from django.utils import timezone
 
+class Users(models.Model):
+    name = models.CharField(max_length=20)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=20)
 
-class Users(models.Model):          # класс пользователя
-    name = models.CharField(max_length=20)         # имя максимальной длиной в 20 символов
-    email = models.EmailField(unique=True)          # уникальное значение email
-    password = models.CharField(max_length=20)     # пароль максимальной длинной в 20
-
-    Role = [                            # массив с доступными ролями
+    Role = [
         ('Покупатель', 'Buyer'),
         ('Продавец', 'Seller')
     ]
 
-    role = models.CharField(max_length=10, choices=Role)        # поле с выбором роли Покупатель/Продавец
-    created_at = models.DateTimeField(default=timezone.now, auto_now_add=True)          #  дата и время регистрации пользователя в магазине с учётом тайм зоны
+    role = models.CharField(max_length=10, choices=Role)
+    created_at = models.DateTimeField(default=timezone.now)  # Убрать auto_now_add=True
 
-
-class Categories(models.Model):         # класс категорий
-    name = models.CharField(max_length=50)          # имя категории с максимальной длиной 50 символов
-
+class Categories(models.Model):
+    name = models.CharField(max_length=50)
     parent = models.ForeignKey(
-        'self',                     # ссылка на ту же модель
-        null=True,                     # позволяет быть корневой директорией
-        blank=True,                     # разрешает пустое значение в админке
-        on_delete=models.CASCADE,           # при удалении родителя - удалит потомка
-        related_name='children'             # доступ к подкатегориям
+        'self',
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        related_name='children'
     )
 
-    def __str__(self):          # для читаемости имени категории в магазине
+    def __str__(self):
         return self.name
-
-

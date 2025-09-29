@@ -93,7 +93,7 @@ SellerProfiles:
 online_store/
 │
 ├── core/                       # Общее ядро
-│   ├── models.py              # User, Category
+│   ├── models.py              # Users, Categories
 │   └── utils.py               # общие функции
 │
 ├── products/                   # Товары

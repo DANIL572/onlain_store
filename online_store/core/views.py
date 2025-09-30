@@ -1,34 +1,20 @@
-# Импортируем класс, который говорит нам о том,
-# что в этом представлении мы будем выводить список объектов из БД
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Users, Categories
-
+from .templatetags.forms import UsersForm  # Исправил импорт формы
 
 class UserList(ListView):
-    # Указываем модель, объекты которой мы будем выводить
     model = Users
-    # Поле, которое будет использоваться для сортировки объектов
     ordering = 'name'
-    # Указываем имя шаблона, в котором будут все инструкции о том,
-    # как именно пользователю должны быть показаны наши объекты
     template_name = 'users.html'
-    # Это имя списка, в котором будут лежать все объекты.
-    # Его надо указать, чтобы обратиться к списку объектов в html-шаблоне.
     context_object_name = 'users'
 
-
-# Вот так мы можем использовать дженерик ListView для вывода списка товаров:
-#
-# Создаем свой класс, который наследуется от ListView.
-# Указываем модель, из которой будем выводить данные.
-# Указываем поле сортировки данных модели (необязательно).
-# Записываем название шаблона.
-# Объявляем, как хотим назвать переменную в шаблоне.
-
 class CategoriesDetail(DetailView):
-    # Модель всё та же, но мы хотим получать информацию по отдельному товару
     model = Categories
-    # Используем другой шаблон — product.html
     template_name = 'categories.html'
-    # Название объекта, в котором будет выбранный пользователем продукт
     context_object_name = 'categories'
+
+class UsersCreate(CreateView):
+    form_class = UsersForm
+    model = Users
+    template_name = 'create_core.html'
+    success_url = '/'  # Добавьте URL для перенаправления после успешного создания

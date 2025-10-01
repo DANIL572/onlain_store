@@ -15,13 +15,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls.py'))
 """
 
-
 from django.contrib import admin
 from django.urls import path, include
+from core.views import HomePageView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('users/', include('core.urls')),  # Замените 'core' на имя вашего приложения
+    path('', HomePageView.as_view(), name='home'),  # Главная страница
+    path('users/', include('core.urls')),  # Приложение core
+    path('sellers/', include('sellers.urls')),
 ]
 
 

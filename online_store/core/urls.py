@@ -1,22 +1,11 @@
-# Чтобы любой пользователь приложения мог ознакомиться с товарами.
-# Для этого необходимо настроить пути в файле urls.py.
-# При выполнении команды инициализации нового приложения Django
-# не создавал этот файл в нашей директории,
-# поэтому сделал сам.
-
 from django.urls import path
 # Импортируем созданное нами представление
-from .views import UserList, CategoriesDetail
+from .views import UserList, UsersCreate, CategoriesDetail
+
 
 urlpatterns = [
-   # path — означает путь.
-   # В данном случае путь ко всем товарам у нас останется пустым,
-   # чуть позже станет ясно почему.
-   # Т.к. наше объявленное представление является классом,
-   # а Django ожидает функцию, нам надо представить этот класс в виде view.
-   # Для этого вызываем метод as_view.
-   path('', UserList.as_view()),
-   # pk — это первичный ключ товара, который будет выводиться у нас в шаблон
-   # int — указывает на то, что принимаются только целочисленные значения
-   path('<int:pk>', CategoriesDetail.as_view()),
+   path('', UserList.as_view(), name='users_list'),
+   path('create/', UsersCreate.as_view(), name='users_create'),
+   path('<int:pk>/', CategoriesDetail.as_view(), name='categories_detail'),
+
 ]

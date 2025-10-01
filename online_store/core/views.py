@@ -1,6 +1,10 @@
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, TemplateView, UpdateView, DeleteView
 from .models import Users, Categories
 from .templatetags.forms import UsersForm  # Исправил импорт формы
+
+# Главная страница
+class HomePageView(TemplateView):
+    template_name = 'home.html'  # создадим этот шаблон
 
 class UserList(ListView):
     model = Users

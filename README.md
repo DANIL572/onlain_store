@@ -22,6 +22,12 @@
     py manage.py startapp core
 
 
+### Команда для создания миграций в Django,
+    py manage.py makemigrations
+
+### Применение миграции
+    py .\manage.py migrate
+
 
 
 

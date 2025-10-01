@@ -4,7 +4,7 @@ from .templatetags.forms import UsersForm  # Исправил импорт фо�
 
 # Главная страница
 class HomePageView(TemplateView):
-    template_name = 'home.html'  # создадим этот шаблон
+    template_name = 'home.html'  # создадим этот
 
 class UserList(ListView):
     model = Users
@@ -21,4 +21,4 @@ class UsersCreate(CreateView):
     form_class = UsersForm
     model = Users
     template_name = 'create_core.html'
-    success_url = '/'  # Добавьте URL для перенаправления после успешного создания
+    success_url = '/'  # Добавьте URL для перенаправления после успешного созда
